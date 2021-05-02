@@ -6,6 +6,8 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+import org.codigorupestre.pagos.autoservicio.OperacionesBancariasAutoServicio;
+
 public class DepositosOxxo {
 
 	private static final Logger LOG = Logger.getLogger(DepositosOxxo.class.getName());
@@ -20,10 +22,20 @@ public class DepositosOxxo {
 		String numeroTarjeta = JOptionPane.showInputDialog("Ingresa numero de tarjeta");
 		BigDecimal monto = new BigDecimal(JOptionPane.showInputDialog("Ingresa el monto"));
 		
+		OperacionesBancariasAutoServicio autoServicio;
 		
-		LOG.info("Operacion a realizar: " + operacion);
-		LOG.info("Numero de tarjeta: " + numeroTarjeta);
-		LOG.info("Monto: " + monto);
+		switch(operacion) {
+		case "deposito":
+			autoServicio=new OperacionesBancariasAutoServicio();
+			autoServicio.depositar(numeroTarjeta, monto);
+			break;
+		case "retiro":
+			autoServicio=new OperacionesBancariasAutoServicio();
+			autoServicio.retirar(numeroTarjeta, monto);
+			break;
+		}
+		
+		
 
 	}
 
